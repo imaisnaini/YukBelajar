@@ -2,11 +2,13 @@ package com.unsia.yukbelajar.data;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,10 +22,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     Context context;
     List<ItemModel> list;
+    TextToSpeech tts;
+    TtsReadyListener ttsReadyListener;
 
-    public ItemAdapter(Context context, List<ItemModel> list){
+    public interface TtsReadyListener {
+        boolean isReady();
+    }
+
+    public ItemAdapter(Context context, List<ItemModel> list, TextToSpeech tts, TtsReadyListener listener){
         this.context = context;
         this.list = list;
+        this.tts = tts;
+        this.ttsReadyListener = listener;
     }
 
     @NonNull
@@ -37,11 +47,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ItemModel Item = list.get(position);
         holder.txtTitle.setText(Item.name);
-        holder.imgIcon.setImageResource(Item.image);
+        holder.imgIcon.setImageResource(Item.image);// Reset icon warna default
+
 
         holder.cardView.setOnClickListener(v -> {
-            MediaPlayer mp = MediaPlayer.create(context, Item.sound);
-            mp.start();
+            if (ttsReadyListener.isReady()) {
+                tts.speak(Item.name, TextToSpeech.QUEUE_FLUSH, null, null);
+            } else {
+                Toast.makeText(context, "Tunggu sebentar, TTS belum siap...", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

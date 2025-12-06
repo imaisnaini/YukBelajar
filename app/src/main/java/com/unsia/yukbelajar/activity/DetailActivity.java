@@ -1,6 +1,8 @@
 package com.unsia.yukbelajar.activity;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +15,13 @@ import com.unsia.yukbelajar.data.ItemModel;
 import com.unsia.yukbelajar.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<ItemModel> items = new ArrayList<>();
+    TextToSpeech tts;
+    boolean isTtsReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +36,22 @@ public class DetailActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
+        // Init TTS
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                tts.setLanguage(new Locale("id","ID"));
+                isTtsReady = true;
+                Toast.makeText(this, "TTS siap digunakan", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // Optional: Set title based on category
         String type = getIntent().getStringExtra("type");
         if(type != null) getSupportActionBar().setTitle(type.toUpperCase());
 
         loadData(type);  // ⬅ separate function to make clean reusable code
 
-        ItemAdapter adapter = new ItemAdapter(this, items);
+        ItemAdapter adapter = new ItemAdapter(this, items, tts, ()->isTtsReady);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
     }
@@ -47,6 +61,15 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed(); // go back
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
     private void loadData(String type) {
 
