@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         app:titleTextColor="@color/white"
-        app:title="Detail Page" />
+        app:title="Detail Page"
+        app:navigationIconTint="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
