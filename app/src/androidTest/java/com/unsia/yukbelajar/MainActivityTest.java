@@ -4,8 +4,8 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.matcher.IntentMatchers;
 
-import com.unsia.yukbelajar.activity.MainActivity;
-import com.unsia.yukbelajar.activity.DetailActivity;
+import com.unsia.yukbelajar.ui.activity.MainActivity;
+import com.unsia.yukbelajar.ui.activity.DetailActivity;
 
 import org.junit.After;
 import org.junit.Before;

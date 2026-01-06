@@ -1,4 +1,4 @@
-package com.unsia.yukbelajar.data;
+package com.unsia.yukbelajar.ui.data;
 
 public class ItemModel {String name;
     int image;
