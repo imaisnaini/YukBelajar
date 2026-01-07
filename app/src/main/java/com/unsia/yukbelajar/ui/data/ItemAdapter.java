@@ -1,7 +1,6 @@
-package com.unsia.yukbelajar.data;
+package com.unsia.yukbelajar.ui.data;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;

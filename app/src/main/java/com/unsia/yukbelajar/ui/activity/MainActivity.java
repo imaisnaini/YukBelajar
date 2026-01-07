@@ -1,4 +1,4 @@
-package com.unsia.yukbelajar.activity;
+package com.unsia.yukbelajar.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

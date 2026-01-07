@@ -1,4 +1,4 @@
-package com.unsia.yukbelajar.activity;
+package com.unsia.yukbelajar.ui.activity;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -10,8 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.unsia.yukbelajar.data.ItemAdapter;
-import com.unsia.yukbelajar.data.ItemModel;
+import com.unsia.yukbelajar.ui.data.ItemAdapter;
+import com.unsia.yukbelajar.ui.data.ItemModel;
 import com.unsia.yukbelajar.R;
 
 import java.util.ArrayList;
