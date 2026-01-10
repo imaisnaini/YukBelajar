@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YukBelajar">
         <activity
+            android:name=".ui.activity.QuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.DetailActivity"
             android:exported="false" />
         <activity

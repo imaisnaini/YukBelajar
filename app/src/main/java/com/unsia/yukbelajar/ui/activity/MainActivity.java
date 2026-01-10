@@ -14,7 +14,7 @@ import com.unsia.yukbelajar.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView cardBuah, cardHewan, cardBentuk;
+    CardView cardBuah, cardHewan, cardBentuk, cardQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,15 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        cardQuiz = findViewById(R.id.cardQuiz);
         cardBuah = findViewById(R.id.cardBuah);
         cardHewan = findViewById(R.id.cardHewan);
         cardBentuk = findViewById(R.id.cardBentuk);
+
+        cardQuiz.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+            startActivity(intent);
+        });
 
         cardBuah.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);

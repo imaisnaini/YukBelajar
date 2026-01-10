@@ -25,7 +25,7 @@
         android:padding="16dp"
         android:gravity="center_horizontal">
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardKuis"
+            android:id="@+id/cardQuiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
