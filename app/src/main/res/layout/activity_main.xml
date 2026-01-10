@@ -32,6 +32,7 @@
             card_view:cardCornerRadius="12dp"
             card_view:cardElevation="6dp"
             android:clickable="true"
+            android:background="@drawable/bg_card_kuis_default"
             android:foreground="?attr/selectableItemBackground">
 
             <LinearLayout
@@ -39,21 +40,35 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="12dp"
-                android:background="@drawable/bg_card_kuis_border"
                 android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/tvKuis"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tvKuis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:layout_weight="1"
                     android:text="Kuis"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvQuizScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#009688"
+                    android:visibility="gone"
+                    android:text="Score: 0"
+                    android:textStyle="bold"
+                    android:layout_marginStart="12dp"/>
+                </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/imgKuis"
+                    android:id="@+id/imgQuizIcon"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@drawable/question_mark"

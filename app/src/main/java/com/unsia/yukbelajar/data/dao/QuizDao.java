@@ -44,4 +44,8 @@ public interface QuizDao {
 
     @Query("SELECT * FROM quiz_result WHERE quizId = :quizId")
     QuizResultEntity getResultByQuiz(int quizId);
+
+    @Query("SELECT * FROM quiz WHERE finished = 1 ORDER BY date DESC LIMIT 1")
+    QuizEntity getLatestFinishedQuiz();
+
 }

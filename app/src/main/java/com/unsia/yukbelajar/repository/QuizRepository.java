@@ -106,4 +106,16 @@ public class QuizRepository {
                 Locale.getDefault()
         ).format(new Date());
     }
+
+    public LiveData<QuizEntity> getLatestFinishedQuiz() {
+        MutableLiveData<QuizEntity> data = new MutableLiveData<>();
+
+        executor.execute(() -> {
+            QuizEntity quiz = quizDao.getLatestFinishedQuiz();
+            data.postValue(quiz);
+        });
+
+        return data;
+    }
+
 }

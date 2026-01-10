@@ -1,7 +1,11 @@
 package com.unsia.yukbelajar.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,13 +13,18 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.unsia.yukbelajar.R;
+import com.unsia.yukbelajar.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
-
+    private MainViewModel viewModel;
+    TextView tvQuizScore;
+    ImageView ivQuizIcon;
     CardView cardBuah, cardHewan, cardBentuk, cardQuiz;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +35,18 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        viewModel = new ViewModelProvider(this)
+                .get(MainViewModel.class);
+
+        tvQuizScore = findViewById(R.id.tvQuizScore);
+        ivQuizIcon = findViewById(R.id.imgQuizIcon);
 
         cardQuiz = findViewById(R.id.cardQuiz);
         cardBuah = findViewById(R.id.cardBuah);
         cardHewan = findViewById(R.id.cardHewan);
         cardBentuk = findViewById(R.id.cardBentuk);
+
+        observeQuizState();
 
         cardQuiz.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, QuizActivity.class);
@@ -55,4 +71,27 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    private void observeQuizState() {
+        viewModel.getLatestQuiz().observe(this, quiz -> {
+
+            if (quiz == null) {
+                // 🆕 Never played
+                cardQuiz.setBackgroundResource(
+                        R.drawable.bg_card_kuis_default
+                );
+                tvQuizScore.setVisibility(View.GONE);
+                ivQuizIcon.setImageResource(R.drawable.question_mark);
+            } else {
+                // ✅ Finished
+                cardQuiz.setBackgroundResource(
+                        R.drawable.bg_card_kuis_finished
+                );
+                tvQuizScore.setVisibility(View.VISIBLE);
+                tvQuizScore.setText("Skor: " + quiz.score);
+                ivQuizIcon.setImageResource(R.drawable.check_mark);
+            }
+        });
+    }
+
 }
