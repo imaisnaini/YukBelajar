@@ -8,13 +8,13 @@ import androidx.room.RoomDatabase;
 
 import com.unsia.yukbelajar.data.dao.ItemDao;
 import com.unsia.yukbelajar.data.dao.KategoriDao;
-import com.unsia.yukbelajar.data.dao.KuisDao;
-import com.unsia.yukbelajar.data.dao.KuisSoalDao;
+import com.unsia.yukbelajar.data.dao.QuizDao;
 import com.unsia.yukbelajar.data.dao.UserDao;
 import com.unsia.yukbelajar.data.entity.ItemEntity;
 import com.unsia.yukbelajar.data.entity.KategoriEntity;
-import com.unsia.yukbelajar.data.entity.KuisEntity;
-import com.unsia.yukbelajar.data.entity.KuisSoalEntity;
+import com.unsia.yukbelajar.data.entity.QuizEntity;
+import com.unsia.yukbelajar.data.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.data.entity.QuizResultEntity;
 import com.unsia.yukbelajar.data.entity.UserEntity;
 
 @Database(
@@ -22,8 +22,9 @@ import com.unsia.yukbelajar.data.entity.UserEntity;
                 UserEntity.class,
                 KategoriEntity.class,
                 ItemEntity.class,
-                KuisEntity.class,
-                KuisSoalEntity.class
+                QuizEntity.class,
+                QuizQuestionEntity.class,
+                QuizResultEntity.class
         },
         version = 1
 )
@@ -34,8 +35,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract KategoriDao kategoriDao();
     public abstract ItemDao itemDao();
-    public abstract KuisDao kuisDao();
-    public abstract KuisSoalDao kuisSoalDao();
+    public abstract QuizDao quizDao();
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
