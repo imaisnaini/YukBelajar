@@ -1,4 +1,4 @@
-package com.unsia.yukbelajar.data.entity;
+package com.unsia.yukbelajar.data.local.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
