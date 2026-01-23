@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.unsia.yukbelajar.R;
 import com.unsia.yukbelajar.data.remote.api.ApiClient;
 import com.unsia.yukbelajar.data.remote.api.ApiService;
+import com.unsia.yukbelajar.data.remote.model.ItemResponse;
 import com.unsia.yukbelajar.data.remote.model.KategoriResponse;
 
 import java.util.List;
@@ -38,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
         });
         ApiService api = ApiClient.getService();
 
-        api.getKategori().enqueue(new Callback<List<KategoriResponse>>() {
+        api.getItems().enqueue(new Callback<List<ItemResponse>>() {
             @Override
             public void onResponse(
-                    Call<List<KategoriResponse>> call,
-                    Response<List<KategoriResponse>> response
+                    Call<List<ItemResponse>> call,
+                    Response<List<ItemResponse>> response
             ) {
                 Log.d("API_TEST", "HTTP Code: " + response.code());
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<KategoriResponse>> call, Throwable t) {
+            public void onFailure(Call<List<ItemResponse>> call, Throwable t) {
                 Log.e("API_TEST", "Connection error", t);
             }
         });

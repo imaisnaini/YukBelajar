@@ -12,15 +12,15 @@ import retrofit2.http.GET;
 
 public interface ApiService {
 
-    @GET("kategori")
+    @GET("kategori/read.php")
     Call<List<KategoriResponse>> getKategori();
-    @GET("items")
+    @GET("item/read.php")
     Call<List<ItemResponse>> getItems();
 
-    @GET("quiz")
+    @GET("kuis/read.php")
     Call<List<QuizResponse>> getQuiz();
 
-    @GET("quiz-question")
+    @GET("kuis_soal/read.php")
     Call<List<QuizQuestionResponse>> getQuizQuestions();
 }
 
