@@ -5,12 +5,12 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.unsia.yukbelajar.data.dao.QuizDao;
-import com.unsia.yukbelajar.data.database.AppDatabase;
+import com.unsia.yukbelajar.data.local.dao.QuizDao;
+import com.unsia.yukbelajar.data.local.database.AppDatabase;
 import com.unsia.yukbelajar.data.dummy.DummyQuizData;
-import com.unsia.yukbelajar.data.entity.QuizEntity;
-import com.unsia.yukbelajar.data.entity.QuizQuestionEntity;
-import com.unsia.yukbelajar.data.entity.QuizResultEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizResultEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

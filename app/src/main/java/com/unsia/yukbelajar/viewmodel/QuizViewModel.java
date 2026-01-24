@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.unsia.yukbelajar.data.dummy.DummyQuizData;
-import com.unsia.yukbelajar.data.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
 import com.unsia.yukbelajar.repository.QuizRepository;
 
 import java.util.ArrayList;

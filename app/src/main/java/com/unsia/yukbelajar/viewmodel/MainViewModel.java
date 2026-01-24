@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.unsia.yukbelajar.data.entity.QuizEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizEntity;
 import com.unsia.yukbelajar.repository.QuizRepository;
 
 public class MainViewModel extends AndroidViewModel {

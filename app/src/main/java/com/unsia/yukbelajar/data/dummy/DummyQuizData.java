@@ -1,6 +1,6 @@
 package com.unsia.yukbelajar.data.dummy;
 
-import com.unsia.yukbelajar.data.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
 
 import java.util.ArrayList;
 import java.util.List;

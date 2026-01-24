@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.unsia.yukbelajar.R;
-import com.unsia.yukbelajar.data.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
 import com.unsia.yukbelajar.viewmodel.QuizViewModel;
 
 import java.util.ArrayList;

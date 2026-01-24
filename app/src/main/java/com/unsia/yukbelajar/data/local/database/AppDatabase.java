@@ -1,4 +1,4 @@
-package com.unsia.yukbelajar.data.database;
+package com.unsia.yukbelajar.data.local.database;
 
 import android.content.Context;
 import android.util.Log;
