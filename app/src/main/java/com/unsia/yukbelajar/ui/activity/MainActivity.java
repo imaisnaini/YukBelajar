@@ -3,6 +3,7 @@ package com.unsia.yukbelajar.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,10 +14,21 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.unsia.yukbelajar.R;
-import com.unsia.yukbelajar.viewmodel.MainViewModel;
+import com.unsia.yukbelajar.data.remote.api.ApiClient;
+import com.unsia.yukbelajar.data.remote.api.ApiService;
+import com.unsia.yukbelajar.data.remote.model.ItemResponse;
+import com.unsia.yukbelajar.data.remote.model.KategoriResponse;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
@@ -35,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        WorkManager.getInstance(this)
+                .getWorkInfosForUniqueWorkLiveData("sync_data_work")
+                .observe(this, workInfos -> {
+                    for (WorkInfo info : workInfos) {
+                        Log.d("WM_STATUS", "State: " + info.getState());
+                    }
+                });
         viewModel = new ViewModelProvider(this)
                 .get(MainViewModel.class);
 

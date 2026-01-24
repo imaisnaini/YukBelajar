@@ -1,12 +1,13 @@
-package com.unsia.yukbelajar.data.dao;
+package com.unsia.yukbelajar.data.local.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.unsia.yukbelajar.data.entity.QuizEntity;
-import com.unsia.yukbelajar.data.entity.QuizQuestionEntity;
-import com.unsia.yukbelajar.data.entity.QuizResultEntity;
+import com.unsia.yukbelajar.data.local.entity.ItemEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizResultEntity;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ public interface QuizDao {
     // --- QUIZ SESSION ---
 
     @Insert
-    long insertQuiz(QuizEntity quiz);
+    long insertQuiz(QuizEntity quiz);@Insert
+    void insertAll(List<QuizEntity> quizEntities);
 
     @Query("SELECT * FROM quiz WHERE quizId = :quizId")
     QuizEntity getQuizById(int quizId);
@@ -49,3 +51,4 @@ public interface QuizDao {
     QuizEntity getLatestFinishedQuiz();
 
 }
+

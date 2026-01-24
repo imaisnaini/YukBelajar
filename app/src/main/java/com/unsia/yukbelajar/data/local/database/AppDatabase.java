@@ -1,21 +1,22 @@
 package com.unsia.yukbelajar.data.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.unsia.yukbelajar.data.dao.ItemDao;
-import com.unsia.yukbelajar.data.dao.KategoriDao;
-import com.unsia.yukbelajar.data.dao.QuizDao;
-import com.unsia.yukbelajar.data.dao.UserDao;
-import com.unsia.yukbelajar.data.entity.ItemEntity;
-import com.unsia.yukbelajar.data.entity.KategoriEntity;
-import com.unsia.yukbelajar.data.entity.QuizEntity;
-import com.unsia.yukbelajar.data.entity.QuizQuestionEntity;
-import com.unsia.yukbelajar.data.entity.QuizResultEntity;
-import com.unsia.yukbelajar.data.entity.UserEntity;
+import com.unsia.yukbelajar.data.local.dao.ItemDao;
+import com.unsia.yukbelajar.data.local.dao.KategoriDao;
+import com.unsia.yukbelajar.data.local.dao.QuizDao;
+import com.unsia.yukbelajar.data.local.dao.UserDao;
+import com.unsia.yukbelajar.data.local.entity.ItemEntity;
+import com.unsia.yukbelajar.data.local.entity.KategoriEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizResultEntity;
+import com.unsia.yukbelajar.data.local.entity.UserEntity;
 
 @Database(
         entities = {
@@ -41,6 +42,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
+                    Log.d("ROOM_DB", "Creating database...");
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,

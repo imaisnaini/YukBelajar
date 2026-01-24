@@ -1,20 +1,16 @@
-package com.unsia.yukbelajar.data.entity;
+package com.unsia.yukbelajar.data.local.entity;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(
         tableName = "quiz_question",
-        foreignKeys = {
-                @ForeignKey(
-                        entity = QuizEntity.class,
-                        parentColumns = "quizId",
-                        childColumns = "quizId",
-                        onDelete = ForeignKey.CASCADE
-                )
-        },
-        indices = {@Index("quizId")}
+        foreignKeys = @ForeignKey(
+                entity = QuizEntity.class,
+                parentColumns = "quizId",
+                childColumns = "quizId",
+                onDelete = ForeignKey.CASCADE
+        )
 )
 public class QuizQuestionEntity {
 
@@ -22,7 +18,6 @@ public class QuizQuestionEntity {
     public int id;
 
     public int quizId;
-
     public String questionImage;
 
     public String correctAnswer;
@@ -32,3 +27,4 @@ public class QuizQuestionEntity {
     public boolean answered;
     public boolean correct;
 }
+

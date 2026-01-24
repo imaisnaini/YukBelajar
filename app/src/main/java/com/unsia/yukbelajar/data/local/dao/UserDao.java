@@ -1,9 +1,9 @@
-package com.unsia.yukbelajar.data.dao;
+package com.unsia.yukbelajar.data.local.dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.unsia.yukbelajar.data.entity.UserEntity;
+import com.unsia.yukbelajar.data.local.entity.UserEntity;
 
 @Dao
 public interface UserDao {

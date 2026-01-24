@@ -1,4 +1,4 @@
-package com.unsia.yukbelajar.data.entity;
+package com.unsia.yukbelajar.data.local.entity;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
         tableName = "item",
         foreignKeys = @ForeignKey(
                 entity = KategoriEntity.class,
-                parentColumns = "kategoriId",
+                parentColumns = "id",
                 childColumns = "kategoriId",
                 onDelete = ForeignKey.CASCADE
         )
@@ -20,6 +20,8 @@ public class ItemEntity {
     public int kategoriId;   // FK
     public String nama;
     public String gambar;
+
+    public ItemEntity(){}
 
     public ItemEntity(int kategoriId, String nama, String gambar) {
         this.kategoriId = kategoriId;

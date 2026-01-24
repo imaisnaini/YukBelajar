@@ -1,5 +1,4 @@
-package com.unsia.yukbelajar.data.entity;
-
+package com.unsia.yukbelajar.data.local.entity;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -17,5 +16,4 @@ public class QuizEntity {
     public int score;
     public boolean finished;
 }
-
 

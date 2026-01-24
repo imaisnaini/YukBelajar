@@ -1,4 +1,4 @@
-package com.unsia.yukbelajar.data.entity;
+package com.unsia.yukbelajar.data.local.entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -26,4 +26,3 @@ public class QuizResultEntity {
     public int finalScore;
     public String completedAt;
 }
-
