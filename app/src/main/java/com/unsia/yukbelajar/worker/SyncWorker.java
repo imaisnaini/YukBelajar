@@ -1,8 +1,7 @@
 package com.unsia.yukbelajar.worker;
 
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Worker;
@@ -22,6 +21,7 @@ public class SyncWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        Log.d("SYNC_WORKER", "SyncWorker started");
         SyncRepository repository =
                 new SyncRepository(getApplicationContext());
 

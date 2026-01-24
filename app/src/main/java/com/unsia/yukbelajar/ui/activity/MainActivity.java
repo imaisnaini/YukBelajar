@@ -10,6 +10,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import com.unsia.yukbelajar.R;
 import com.unsia.yukbelajar.data.remote.api.ApiClient;
@@ -37,29 +39,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ApiService api = ApiClient.getService();
-
-        api.getItems().enqueue(new Callback<List<ItemResponse>>() {
-            @Override
-            public void onResponse(
-                    Call<List<ItemResponse>> call,
-                    Response<List<ItemResponse>> response
-            ) {
-                Log.d("API_TEST", "HTTP Code: " + response.code());
-
-                if (response.isSuccessful()) {
-                    Log.d("API_TEST", "Success! Size: " +
-                            (response.body() != null ? response.body().size() : 0));
-                } else {
-                    Log.e("API_TEST", "Failed: " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<ItemResponse>> call, Throwable t) {
-                Log.e("API_TEST", "Connection error", t);
-            }
-        });
+        WorkManager.getInstance(this)
+                .getWorkInfosForUniqueWorkLiveData("sync_data_work")
+                .observe(this, workInfos -> {
+                    for (WorkInfo info : workInfos) {
+                        Log.d("WM_STATUS", "State: " + info.getState());
+                    }
+                });
 
         cardBuah = findViewById(R.id.cardBuah);
         cardHewan = findViewById(R.id.cardHewan);

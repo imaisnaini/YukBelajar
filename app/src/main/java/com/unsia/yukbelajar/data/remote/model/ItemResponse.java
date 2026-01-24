@@ -9,7 +9,7 @@ public class ItemResponse {
     public String nama;
     @SerializedName("gambar")
     public String gambar;
-    @SerializedName("kategori_id")
+    @SerializedName("kategori")
     public int kategori_id;
 }
 

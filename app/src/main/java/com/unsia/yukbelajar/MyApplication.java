@@ -3,10 +3,13 @@ package com.unsia.yukbelajar;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.work.Configuration;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 import com.unsia.yukbelajar.data.local.database.AppDatabase;
@@ -36,8 +39,8 @@ public class MyApplication extends Application {
         PeriodicWorkRequest syncWork =
                 new PeriodicWorkRequest.Builder(
                         SyncWorker.class,
-                        12,
-                        TimeUnit.HOURS
+                        5,
+                        TimeUnit.MINUTES
                 )
                         .setConstraints(constraints)
                         .addTag("sync_data")
