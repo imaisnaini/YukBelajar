@@ -1,7 +1,10 @@
 package com.unsia.yukbelajar.ui.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,17 +22,9 @@ import androidx.work.WorkManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.unsia.yukbelajar.R;
-import com.unsia.yukbelajar.data.remote.api.ApiClient;
-import com.unsia.yukbelajar.data.remote.api.ApiService;
-import com.unsia.yukbelajar.data.remote.model.ItemResponse;
-import com.unsia.yukbelajar.data.remote.model.KategoriResponse;
+import com.unsia.yukbelajar.util.NotificationUtil;
 import com.unsia.yukbelajar.viewmodel.MainViewModel;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.unsia.yukbelajar.viewmodel.QuizViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
@@ -58,6 +53,27 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this)
                 .get(MainViewModel.class);
 
+        checkPermission();
+        initViews();
+        viewListener();
+        observeQuizState();
+
+    }
+
+    private void checkPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        100
+                );
+            }
+        }
+    }
+
+    private void initViews(){
         tvQuizScore = findViewById(R.id.tvQuizScore);
         ivQuizIcon = findViewById(R.id.imgQuizIcon);
 
@@ -65,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
         cardBuah = findViewById(R.id.cardBuah);
         cardHewan = findViewById(R.id.cardHewan);
         cardBentuk = findViewById(R.id.cardBentuk);
+    }
 
-        observeQuizState();
-
+    private void viewListener(){
         cardQuiz.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, QuizActivity.class);
             startActivity(intent);
