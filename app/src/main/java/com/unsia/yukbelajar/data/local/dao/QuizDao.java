@@ -1,5 +1,6 @@
 package com.unsia.yukbelajar.data.local.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -48,7 +49,7 @@ public interface QuizDao {
     QuizResultEntity getResultByQuiz(int quizId);
 
     @Query("SELECT * FROM quiz WHERE finished = 1 ORDER BY date DESC LIMIT 1")
-    QuizEntity getLatestFinishedQuiz();
+    LiveData<QuizEntity> getLatestFinishedQuiz();
 
 }
 
