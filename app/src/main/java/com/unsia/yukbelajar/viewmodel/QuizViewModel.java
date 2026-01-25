@@ -22,6 +22,7 @@ public class QuizViewModel extends AndroidViewModel {
     // 🔥 NEVER NULL
     private MutableLiveData<List<QuizQuestionEntity>> questions =
             new MutableLiveData<>(new ArrayList<>());
+    private MutableLiveData<Integer> quizFinishedEvent = new MutableLiveData<>();
 
     private int currentIndex = 0;
     private int score = 0;
@@ -91,6 +92,11 @@ public class QuizViewModel extends AndroidViewModel {
                 quizId.getValue(),
                 score
         );
+        quizFinishedEvent.setValue(score);
+    }
+
+    public LiveData<Integer>getQuizFinishedEvent() {
+        return quizFinishedEvent;
     }
 }
 

@@ -1,20 +1,18 @@
 package com.unsia.yukbelajar.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.unsia.yukbelajar.R;
 import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.util.NotificationUtil;
 import com.unsia.yukbelajar.viewmodel.QuizViewModel;
 
 import java.util.ArrayList;
@@ -46,6 +44,15 @@ public class QuizActivity extends AppCompatActivity {
         viewModel.startQuiz(2);
 
         observeQuestions();
+
+        viewModel.getQuizFinishedEvent().observe(this, score -> {
+            if (score != null) {
+                NotificationUtil.showQuizFinished(
+                        this,
+                        score
+                );
+            }
+        });
     }
 
     private void setupToolbar() {
