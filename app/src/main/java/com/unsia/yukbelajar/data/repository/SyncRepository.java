@@ -9,10 +9,12 @@ import com.unsia.yukbelajar.data.local.database.AppDatabase;
 import com.unsia.yukbelajar.data.local.entity.ItemEntity;
 import com.unsia.yukbelajar.data.local.entity.KategoriEntity;
 import com.unsia.yukbelajar.data.local.entity.QuizEntity;
+import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
 import com.unsia.yukbelajar.data.remote.api.ApiClient;
 import com.unsia.yukbelajar.data.remote.api.ApiService;
 import com.unsia.yukbelajar.data.remote.model.ItemResponse;
 import com.unsia.yukbelajar.data.remote.model.KategoriResponse;
+import com.unsia.yukbelajar.data.remote.model.QuizQuestionResponse;
 import com.unsia.yukbelajar.data.remote.model.QuizResponse;
 
 import java.io.IOException;
@@ -42,6 +44,7 @@ public class SyncRepository {
             syncKategori();
             syncItem();
             syncQuiz();
+            syncQuizQuestion();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,43 +64,69 @@ public class SyncRepository {
                 e.nama = r.nama;
                 entities.add(e);
             }
-            kategoriDao.insertAll(entities);
+            kategoriDao.upsertAll(entities);
         }
     }
 
     private void syncItem() throws IOException {
-        Response<List<ItemResponse>> response =
+        Response<ItemResponse> response =
                 api.getItems().execute();
 
         if (response.isSuccessful() && response.body() != null) {
             List<ItemEntity> entities = new ArrayList<>();
-            for (ItemResponse r : response.body()) {
+            ItemResponse r = response.body();
+            for (ItemResponse.ItemData d : r.data) {
                 ItemEntity e = new ItemEntity();
-                e.id = r.id;
-                e.nama = r.nama;
-                e.kategoriId = r.kategori_id;
-                e.gambar = r.gambar;
+                e.id = d.id;
+                e.nama = d.nama;
+                e.kategoriId = d.kategori_id;
+                e.gambar = d.gambar;
                 entities.add(e);
             }
-            itemDao.insertAll(entities);
+            itemDao.upsertAll(entities);
         }
     }
 
     private void syncQuiz() throws IOException {
-        Response<List<QuizResponse>> response =
+        Response<QuizResponse> response =
                 api.getQuiz().execute();
 
         if (response.isSuccessful() && response.body() != null) {
             List<QuizEntity> entities = new ArrayList<>();
-            for (QuizResponse r : response.body()) {
+            QuizResponse r = response.body();
+            for (QuizResponse.QuizData d : r.data) {
                 QuizEntity e = new QuizEntity();
-                e.quizId = r.quizId;
-                e.date = r.date;
-                e.score = r.score;
-                e.finished = r.finished;
+                e.id = d.quizId;
+                e.date = d.date;
+                e.totalQuestion = d.totalQuestion;
+                e.score = d.score;
+                e.finished = d.finished;
                 entities.add(e);
             }
-            quizDao.insertAll(entities);
+            quizDao.upsertAll(entities);
+        }
+    }
+
+    private void syncQuizQuestion() throws IOException {
+        Response<QuizQuestionResponse> response =
+                api.getQuizQuestions().execute();
+
+        if (response.isSuccessful() && response.body() != null) {
+            List<QuizQuestionEntity> entities = new ArrayList<>();
+            QuizQuestionResponse r = response.body();
+            for (QuizQuestionResponse.QuestionData d : r.data) {
+                QuizQuestionEntity e = new QuizQuestionEntity();
+                e.id = d.id;
+                e.quizId = d.quizId;
+                e.questionImage = d.questionImage;
+                e.correctAnswer = d.correctAnswer;
+                e.wrongAnswer1 = d.wrongAnswer1;
+                e.wrongAnswer2 = d.wrongAnswer2;
+                e.correct = d.correct;
+                e.answered = d.answered;
+                entities.add(e);
+            }
+            quizDao.upsertQuestion(entities);
         }
     }
 }

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class QuizEntity {
 
     @PrimaryKey(autoGenerate = true)
-    public int quizId;
+    public int id;
 
     @NonNull
     public String date; // yyyy-MM-dd HH:mm

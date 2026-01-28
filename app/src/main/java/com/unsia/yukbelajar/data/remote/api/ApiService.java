@@ -19,13 +19,13 @@ public interface ApiService {
     @GET("kategori/read.php")
     Call<List<KategoriResponse>> getKategori();
     @GET("item/read.php")
-    Call<List<ItemResponse>> getItems();
+    Call<ItemResponse> getItems();
 
-    @GET("kuis/read.php")
-    Call<List<QuizResponse>> getQuiz();
+    @GET("quiz/read.php")
+    Call<QuizResponse> getQuiz();
 
-    @GET("kuis_soal/read.php")
-    Call<List<QuizQuestionResponse>> getQuizQuestions();
+    @GET("quizQuestion/read.php")
+    Call<QuizQuestionResponse> getQuizQuestions();
 
     @FormUrlEncoded
     @POST("user/login.php")

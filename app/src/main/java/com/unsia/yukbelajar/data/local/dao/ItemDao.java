@@ -4,6 +4,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import androidx.room.Delete;
+import androidx.room.Upsert;
 
 import com.unsia.yukbelajar.data.local.entity.ItemEntity;
 
@@ -19,6 +20,8 @@ public interface ItemDao {
     // Insert multiple items (useful for prepopulate or Firebase sync)
     @Insert
     void insertAll(List<ItemEntity> items);
+    @Upsert
+    void upsertAll(List<ItemEntity> items);
 
     // Update item
     @Update

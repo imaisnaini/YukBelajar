@@ -29,24 +29,37 @@ public class QuizRepository {
         executor = Executors.newSingleThreadExecutor();
     }
 
-    // -----------------------------
-    // CREATE QUIZ
-    // -----------------------------
-    public MutableLiveData<Integer> createQuiz(int totalQuestion) {
-        MutableLiveData<Integer> quizIdLiveData = new MutableLiveData<>();
+    public LiveData<QuizEntity> getTodayQuiz() {
+        MutableLiveData<QuizEntity> data = new MutableLiveData<>();
 
         executor.execute(() -> {
-            QuizEntity quiz = new QuizEntity();
-            quiz.date = getCurrentDate();
-            quiz.totalQuestion = totalQuestion;
-            quiz.score = 0;
-            quiz.finished = false;
+            String today = new SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+            ).format(new Date());
 
-            int quizId = (int) quizDao.insertQuiz(quiz);
-            quizIdLiveData.postValue(quizId);
+            QuizEntity quiz = quizDao.getTodayQuiz(today);
+            data.postValue(quiz);
         });
 
-        return quizIdLiveData;
+        return data;
+    }
+
+    public LiveData<QuizEntity> getFinishedTodayQuiz() {
+        MutableLiveData<QuizEntity> data = new MutableLiveData<>();
+
+        executor.execute(() -> {
+            String today = new SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+            ).format(new Date());
+
+            data.postValue(
+                    quizDao.getFinishedTodayQuiz(today)
+            );
+        });
+
+        return data;
     }
 
     // -----------------------------
