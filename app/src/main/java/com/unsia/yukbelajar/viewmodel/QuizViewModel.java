@@ -68,7 +68,7 @@ public class QuizViewModel extends AndroidViewModel {
 
         repository.answerQuestion(question.id, isCorrect);
 
-        if (isCorrect) score += 10;
+        if (isCorrect) score += 20;
         currentIndex++;
     }
 
