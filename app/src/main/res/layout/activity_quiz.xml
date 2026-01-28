@@ -53,5 +53,12 @@
             android:layout_marginTop="8dp"
             android:text="Answer 2"/>
 
+        <Button
+            android:id="@+id/btnAnswer3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Answer 3"/>
+
     </LinearLayout>
 </LinearLayout>

@@ -8,11 +8,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.unsia.yukbelajar.data.dummy.DummyQuizData;
+import com.unsia.yukbelajar.data.local.entity.QuizEntity;
 import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
 import com.unsia.yukbelajar.data.repository.QuizRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class QuizViewModel extends AndroidViewModel {
 
@@ -31,41 +35,25 @@ public class QuizViewModel extends AndroidViewModel {
         super(app);
         repository = new QuizRepository(app);
     }
+    public void loadTodayQuiz() {
+        repository.getTodayQuiz()
+                .observeForever(quiz -> {
+                    if (quiz == null) {
+                        // no quiz today
+                        quizFinishedEvent.postValue(-1);
+                        return;
+                    }
 
-    // -----------------------------
-    // START QUIZ
-    // -----------------------------
-    public void startQuiz(int totalQuestion) {
-        repository.createQuiz(totalQuestion)
-                .observeForever(id -> {
-                    quizId.setValue(id);
-                    injectDummyQuestions(id);
-                    repository.getQuestions(id)
+                    quizId.setValue(quiz.id);
+
+                    repository.getQuestions(quiz.id)
                             .observeForever(list -> {
                                 questions.postValue(list);
                             });
                 });
     }
 
-    // -----------------------------
-    // INJECT QUESTIONS (DUMMY)
-    // -----------------------------
-    private void injectDummyQuestions(int quizId) {
-        List<QuizQuestionEntity> dummy =
-                DummyQuizData.createQuestions(quizId);
 
-        repository.insertQuestions(dummy);
-    }
-
-    // -----------------------------
-    // LOAD QUESTIONS
-    // -----------------------------
-//    private void loadQuestions(int quizId) {
-//        questions = repository.getQuestions(quizId)
-//                .observeForever(list -> {
-//                    questions.postValue(list);
-//                });
-//    }
 
     public LiveData<List<QuizQuestionEntity>> getQuestions() {
         return questions;

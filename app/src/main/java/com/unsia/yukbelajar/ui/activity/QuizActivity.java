@@ -24,7 +24,7 @@ public class QuizActivity extends AppCompatActivity {
     private QuizViewModel viewModel;
 
     private ImageView imgQuestion;
-    private Button btn1, btn2;
+    private Button btn1, btn2, btn3;
 
     private List<QuizQuestionEntity> questions;
     private int index = 0;
@@ -37,11 +37,8 @@ public class QuizActivity extends AppCompatActivity {
         setupToolbar();
         bindViews();
 
-        viewModel = new ViewModelProvider(this)
-                .get(QuizViewModel.class);
-
-        // Start quiz with 2 questions (dummy)
-        viewModel.startQuiz(2);
+        viewModel = new ViewModelProvider(this).get(QuizViewModel.class);
+        viewModel.loadTodayQuiz();
 
         observeQuestions();
 
@@ -65,6 +62,7 @@ public class QuizActivity extends AppCompatActivity {
         imgQuestion = findViewById(R.id.imgQuestion);
         btn1 = findViewById(R.id.btnAnswer1);
         btn2 = findViewById(R.id.btnAnswer2);
+        btn3 = findViewById(R.id.btnAnswer3);
     }
 
     private void observeQuestions() {
@@ -101,9 +99,11 @@ public class QuizActivity extends AppCompatActivity {
 
         btn1.setText(answers.get(0));
         btn2.setText(answers.get(1));
+        btn3.setText(answers.get(2));
 
         btn1.setOnClickListener(v -> submitAnswer(q, answers.get(0)));
         btn2.setOnClickListener(v -> submitAnswer(q, answers.get(1)));
+        btn3.setOnClickListener(v -> submitAnswer(q, answers.get(2)));
     }
 
     private void submitAnswer(QuizQuestionEntity q, String selected) {
