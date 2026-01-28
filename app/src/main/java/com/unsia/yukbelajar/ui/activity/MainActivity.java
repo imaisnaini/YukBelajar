@@ -22,9 +22,7 @@ import androidx.work.WorkManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.unsia.yukbelajar.R;
-import com.unsia.yukbelajar.util.NotificationUtil;
 import com.unsia.yukbelajar.viewmodel.MainViewModel;
-import com.unsia.yukbelajar.viewmodel.QuizViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.unsia.yukbelajar.R;
 import com.unsia.yukbelajar.data.local.entity.QuizQuestionEntity;
+import com.unsia.yukbelajar.util.ImageLoadTask;
 import com.unsia.yukbelajar.util.NotificationUtil;
 import com.unsia.yukbelajar.viewmodel.QuizViewModel;
 
@@ -83,12 +84,10 @@ public class QuizActivity extends AppCompatActivity {
 
         QuizQuestionEntity q = questions.get(index);
 
-        // Load image (simple version)
-        int imgRes = getResources()
-                .getIdentifier(q.questionImage,
-                        "drawable",
-                        getPackageName());
-        imgQuestion.setImageResource(imgRes);
+        // 🔥 AsyncTask image loading
+        String imageUrl = q.questionImage;
+        imgQuestion.setTag(imageUrl);
+        new ImageLoadTask(imgQuestion).execute(imageUrl);
 
         // Shuffle answers
         List<String> answers = new ArrayList<>();
