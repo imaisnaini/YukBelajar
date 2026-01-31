@@ -24,13 +24,72 @@
         android:orientation="vertical"
         android:padding="16dp"
         android:gravity="center_horizontal">
+
+        <!-- CARD PROFILE -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:background="@drawable/bg_card_blue"
+                android:gravity="center_vertical">
+
+                <!-- FOTO -->
+                <ImageView
+                    android:id="@+id/imgProfileMain"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/ic_profile_placeholder"
+                    android:background="@drawable/bg_circle_white"
+                    android:padding="10dp"
+                    android:scaleType="centerCrop" />
+
+                <!-- NAMA -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/txtHello"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Halo 👋"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txtNameMain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yuk Belajar"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD KUIS -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardKuis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            card_view:cardCornerRadius="12dp"
-            card_view:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground">
 
@@ -46,7 +105,6 @@
                     android:id="@+id/tvKuis"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
                     android:layout_weight="1"
                     android:text="Kuis"
                     android:textSize="24sp"
@@ -57,53 +115,12 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@drawable/question_mark"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"/>
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#BDBDBD"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
 
-        <!-- CARD 1 -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardHewan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            card_view:cardCornerRadius="12dp"
-            card_view:cardElevation="6dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:background="@drawable/bg_card_peach"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/tvHewan"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:text="Hewan"
-                    android:textSize="24sp"
-                    android:textStyle="bold"/>
-
-                <ImageView
-                    android:id="@+id/imgHewan"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/ic_animals"
-                    android:scaleType="centerCrop" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
         <!-- CARD 2 -->
         <androidx.cardview.widget.CardView
@@ -139,6 +156,44 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@drawable/ic_fruits"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD HEWAN -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardHewan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="6dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:background="@drawable/bg_card_red"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvHewan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Hewan"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/imgHewan"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/ic_animals"
                     android:scaleType="centerCrop" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
